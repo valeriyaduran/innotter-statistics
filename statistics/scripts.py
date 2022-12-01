@@ -23,7 +23,6 @@ def create_table():
             'WriteCapacityUnits': 10
         }
     )
-    print("Table was created!")
 
 
 if __name__ == '__main__':
