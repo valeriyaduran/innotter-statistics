@@ -1,6 +1,6 @@
 services:
   fastapi:
-    container_name: innotter-fastapi
+    container_name: statistics-fastapi
     restart: always
     build:
       context: .
@@ -17,10 +17,10 @@ services:
     container_name: statistics-dynamodb
     image: amazon/dynamodb-local
     restart: unless-stopped
-    networks:
-      - innotter_network
     ports:
       - "8002:8002"
+    networks:
+      - innotter_network
     volumes:
       - dynamodb_volume:/home/dynamodb/data
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodb/data/ -port 8002"
@@ -32,11 +32,10 @@ services:
     build:
       context: .
       dockerfile: admin.Dockerfile
-    networks:
-      - innotter_network
     ports:
       - "8001:8001"
-    user: root
+    networks:
+      - innotter_network
     env_file:
       - .env.dev
     depends_on:

@@ -4,11 +4,10 @@ from db import initialize_db
 def create_table():
     db = initialize_db()
     db.create_table(
-        TableName='innotter_stats',  # create table Stats
+        TableName='Stats',  # create table Stats
         AttributeDefinitions=[
             {
                 'AttributeName': 'user_id',
-                # In this case, I only specified uid as partition key (there is no sort key)
                 'AttributeType': 'S'  # with type string
             }
         ],

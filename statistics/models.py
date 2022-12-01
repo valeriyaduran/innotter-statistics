@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class Stats(BaseModel):
-    id: str
+    id: int
     user_id: str
     posts: int = 0
     likes: int = 0
