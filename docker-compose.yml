@@ -7,12 +7,20 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - innotter_network
+      - stats_network
     env_file:
       - .env.dev
     volumes:
-      - fastapi_volume:/app
-
+      - fastapi_volume:/microservice
+  consumer:
+    container_name: statistics-consumer
+    build:
+      context: .
+    entrypoint: /microservice/entrypoint.sh
+    networks:
+      - stats_network
+    volumes:
+      - consumer_volume:/microservice
   dynamodb:
     container_name: statistics-dynamodb
     image: amazon/dynamodb-local
@@ -20,12 +28,11 @@ services:
     ports:
       - "8002:8002"
     networks:
-      - innotter_network
+      - stats_network
     volumes:
       - dynamodb_volume:/home/dynamodb/data
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodb/data/ -port 8002"
     user: root
-
   dynamodb-admin:
     container_name: statistics-dynamodb-admin
     image: aaronshaf/dynamodb-admin
@@ -35,7 +42,7 @@ services:
     ports:
       - "8001:8001"
     networks:
-      - innotter_network
+      - stats_network
     env_file:
       - .env.dev
     depends_on:
@@ -44,6 +51,9 @@ services:
 volumes:
   fastapi_volume:
   dynamodb_volume:
+  consumer_volume:
 
 networks:
-  innotter_network:
+  stats_network:
+    external:
+      name: innotter_innotter_network

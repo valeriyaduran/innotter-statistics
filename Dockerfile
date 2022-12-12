@@ -10,7 +10,6 @@ WORKDIR /microservice
 COPY Pipfile .
 COPY Pipfile.lock .
 
-
 RUN pipenv install --system --deploy --ignore-pipfile
 
 COPY . .
