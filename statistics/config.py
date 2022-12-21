@@ -7,7 +7,7 @@ from pathlib import Path
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv_path = join(BASE_DIR, '.env.dev')
-AWS_REGION = os.getenv('AWS_REGION')
+AWS_DEFAULT_REGION = os.getenv('AWS_DEFAULT_REGION')
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 DYNAMO_ENDPOINT = os.getenv('DYNAMO_ENDPOINT')
