@@ -9,7 +9,7 @@ services:
     networks:
       - stats_network
     env_file:
-      - .env.dev
+      - .env
     volumes:
       - fastapi_volume:/microservice
   consumer:
@@ -44,7 +44,7 @@ services:
     networks:
       - stats_network
     env_file:
-      - .env.dev
+      - .env
     depends_on:
       - dynamodb
 

@@ -1,4 +1,3 @@
-import os
 import boto3
 
 from statistics.config import DYNAMO_ENDPOINT, AWS_DEFAULT_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
@@ -12,3 +11,10 @@ def initialize_db():
                         aws_secret_access_key=AWS_SECRET_ACCESS_KEY
                         )
     return db
+
+
+async def get_table():
+    dynamodb = initialize_db()
+    table = dynamodb.Table('Stats')
+    return table
+

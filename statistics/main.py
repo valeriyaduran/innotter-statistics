@@ -1,32 +1,35 @@
 from fastapi import FastAPI
 
-from statistics.db import initialize_db
-from statistics.models import Stats
+from statistics.registry import DynamoDBRegistry
 
 app = FastAPI()
-db = initialize_db()
 
 
-@app.get("/pages/", response_model=Stats)
-async def get_pages(stats: Stats):
-    return stats.pages
+@app.get("/{user_id}/pages/")
+async def get_pages(user_id: int):
+    pages_count = await DynamoDBRegistry.get_table_data(user_id, 'pages')
+    return {"user_id": user_id, "pages": pages_count}
 
 
-@app.get("/posts/", response_model=Stats)
-async def get_posts(stats: Stats):
-    return stats.posts
+@app.get("/{user_id}/posts/")
+async def get_posts(user_id: int):
+    posts_count = await DynamoDBRegistry.get_table_data(user_id, 'pages')
+    return {"user_id": user_id, "posts": posts_count}
 
 
-@app.get("/likes/")
-async def get_likes(stats: Stats):
-    return stats.likes
+@app.get("/{user_id}/likes/")
+async def get_likes(user_id: int):
+    likes_count = await DynamoDBRegistry.get_table_data(user_id, 'likes')
+    return {"user_id": user_id, "likes": likes_count}
 
 
-@app.get("/followers/")
-async def get_followers(stats: Stats):
-    return stats.followers
+@app.get("/{user_id}/followers/")
+async def get_followers(user_id: int):
+    followers_count = await DynamoDBRegistry.get_table_data(user_id, 'followers')
+    return {"user_id": user_id, "followers": followers_count}
 
 
-@app.get("/follow_requests/")
-async def get_follow_requests(stats: Stats):
-    return stats.follow_requests
+@app.get("/{user_id}/follow_requests/")
+async def get_follow_requests(user_id: int):
+    follow_requests_count = await DynamoDBRegistry.get_table_data(user_id, 'follow_requests')
+    return {"user_id": user_id, "follow_requests": follow_requests_count}
