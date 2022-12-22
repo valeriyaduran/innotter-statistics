@@ -1,3 +1,5 @@
+from fastapi import HTTPException
+
 from statistics.db import get_table
 from statistics.handlers import check_user_id
 
@@ -20,7 +22,7 @@ class DynamoDBRegistry:
     async def get_table_data(user_id, field):
         await check_user_id(user_id)
         table = await get_table()
-        item = await table.get_item(
+        item = table.get_item(
             Key={
                 "user_id": user_id
             }
