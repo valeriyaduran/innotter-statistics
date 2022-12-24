@@ -1,4 +1,4 @@
-from db import initialize_db
+from statistics.db import initialize_db
 
 
 def create_table():
@@ -8,12 +8,12 @@ def create_table():
         AttributeDefinitions=[
             {
                 'AttributeName': 'user_id',
-                'AttributeType': 'S'  # with type string
+                'AttributeType': 'N'  # with type string
             }
         ],
         KeySchema=[
             {
-                'AttributeName': 'user_id',  # attribute id serves as partition key
+                'AttributeName': 'user_id',
                 'KeyType': 'HASH'
             }
         ],
