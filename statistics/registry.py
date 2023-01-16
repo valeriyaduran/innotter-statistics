@@ -1,5 +1,3 @@
-from fastapi import HTTPException
-
 from statistics.db import get_table
 from statistics.handlers import check_user_id, check_data_by_field_exists
 
